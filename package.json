@@ -6,8 +6,8 @@
   "scripts": {
     "upgrade": "yarn upgrade-interactive",
     "check:node": "check-node-version --package",
-    "deploy:dev": "yarn run build && firebase deploy --token='1/KwRN4JmOiCZcJ_5eOmDvFkdU4-5qpxHF3l9TbF6zVgE' --project=\"react-seed-ae755\"",
-    "deploy:prod": "yarn run build && firebase deploy --token='1/KwRN4JmOiCZcJ_5eOmDvFkdU4-5qpxHF3l9TbF6zVgE' --project=\"react-seed-prod\"",
+    "deploy:dev": "yarn run build",
+    "deploy:prod": "yarn run build",
     "deploy:ci:dev": "yarn run deploy:dev",
     "deploy:ci:prod": "yarn run deploy:prod",
     "test": "yarn lint",
@@ -46,7 +46,6 @@
     "eslint-plugin-prettier": "^2.0.1",
     "eslint-plugin-react": "6.9.0",
     "file-loader": "^0.10.0",
-    "firebase-tools": "^3.2.2",
     "husky": "^0.14.3",
     "lint-staged": "^3.4.0",
     "node-sass": "^4.7.2",
@@ -65,7 +64,6 @@
   },
   "dependencies": {
     "babel-runtime": "6.22.0",
-    "bootstrap-sass": "^3.3.7",
     "check-node-version": "^3.2.0",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
