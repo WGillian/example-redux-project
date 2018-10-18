@@ -2,6 +2,7 @@
 
 This project took me -- hours.
 This project was completed --.
+Using the [PunkAPI](https://punkapi.com/documentation/v2)
 
 ## Technology Stack
 react, Redux, Javascript ES6
