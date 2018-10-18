@@ -1,21 +1,19 @@
 import React from 'react'
-import _ from 'lodash'
-import { BrowserRouter, browserHistory, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { routes } from '../../routes'
+import { ThemeProvider } from 'styled-components'
+import Punk from 'containers/punk'
+import theme from 'styles/theme'
 import createStore from '../../redux/store'
-import '../../styles/bootstrap.scss'
+import injectGlobalStyles from './globalStyles.js'
+
+injectGlobalStyles()
 
 const store = createStore()
 
 export default () => (
-  <Provider store={store}>
-    <BrowserRouter history={browserHistory}>
-      <div>
-        {_.map(routes, (route, index) => (
-          <Route key={index} path={route.path} component={route.component} exact={route.exact} />
-        ))}
-      </div>
-    </BrowserRouter>
-  </Provider>
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <Punk />
+    </Provider>
+  </ThemeProvider>
 )
