@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 const initialState = {
-  page: 1,
+  page: 3,
   beers: [],
 }
 
