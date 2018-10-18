@@ -1,5 +1,6 @@
 /* eslint-disable no-shadow */
 const initialState = {
+  page: 1,
   beers: [],
 }
 

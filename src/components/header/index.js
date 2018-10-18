@@ -14,6 +14,7 @@ const HeaderContainer = Div.extend`
 
 const HeaderResponsiveContainer = styled(ResponsiveContainer)`
   justify-content: center;
+  height: 100px;
 `
 
 const Heading = styled.h1`
