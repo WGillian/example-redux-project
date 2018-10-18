@@ -14,7 +14,6 @@ files:
   include: 'src/**/*.s+(a|c)ss'
   ignore:
     - 'node_modules/**/*.*'
-    - 'src/styles/bootstrap/_bootstrap.scss'
 # Rule Configuration
 rules:
   extends-before-mixins: 2
