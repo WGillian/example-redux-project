@@ -12,13 +12,13 @@ const HeaderContainer = Div.extend`
   right: 0;
 `
 
-const HeaderResponsiveContainer = styled(ResponsiveContainer)`
+const HeaderResponsiveContainer = ResponsiveContainer.extend`
   justify-content: center;
   height: 100px;
 `
 
 const Heading = styled.h1`
-  color: ${props => props.theme.headingColor};
+  color: ${props => props.theme.primaryHeadingColor};
 `
 
 export default () => (
