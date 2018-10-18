@@ -16,11 +16,11 @@ export const punkSelector = createSelector(
       descriptionSummary: _.truncate(beer.description),
       stats: getBeerStats(beer),
     }))
-    const isNotFirstPage = punkState.page > 1
+    const isFirstPage = punkState.page <= 1
     return {
       ...punkState,
       beers: beers,
-      isNotFirstPage: isNotFirstPage,
+      isFirstPage: isFirstPage,
     }
   },
 )

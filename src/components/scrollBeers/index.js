@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import _ from 'lodash'
 import Div from 'components/core/div'
@@ -16,12 +16,13 @@ const UpPanel = Div.extend`
   margin: 0 160px;
   flex: 1;
   justify-content: center;
-  text-align: center;
-  cursor: pointer;
+  align-items: center;
+  ${props => (props.isClickable ? 'cursor: pointer' : '')};
 `
 
 const DownPanel = styled(UpPanel)`
   border-radius: 0 0 50px 50px;
+  cursor: pointer;
 `
 
 const ScrollPanel = Div.extend`
@@ -73,16 +74,29 @@ const BeerDisplay = props => {
   )
 }
 
-export default props => (
-  <ScrollBeersContainer>
-    <UpPanel>{props.isNotFirstPage ? <UpArrow /> : null}</UpPanel>
-    <ScrollPanel>
-      {_.map(props.beers, beer => (
-        <BeerDisplay beer={beer} key={beer.id} />
-      ))}
-    </ScrollPanel>
-    <DownPanel>
-      <DownArrow />
-    </DownPanel>
-  </ScrollBeersContainer>
-)
+class ScrollBeers extends Component {
+  render() {
+    const isClickable = !this.props.isFirstPage
+    return (
+      <ScrollBeersContainer>
+        <UpPanel isClickable={isClickable} onClick={isClickable ? () => this.props.onDecrementPage() : () => null}>
+          {isClickable ? <UpArrow /> : null}
+        </UpPanel>
+        <ScrollPanel>
+          {_.map(this.props.beers, beer => (
+            <BeerDisplay beer={beer} key={beer.id} />
+          ))}
+        </ScrollPanel>
+        <DownPanel onClick={() => this.props.onIncrementPage()}>
+          <DownArrow />
+        </DownPanel>
+      </ScrollBeersContainer>
+    )
+  }
+}
+
+ScrollBeers.defaultProps = {
+  isFirstPage: true,
+}
+
+export default ScrollBeers
