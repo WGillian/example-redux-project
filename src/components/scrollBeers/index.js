@@ -53,8 +53,8 @@ const Stats = Div.extend`
 
 const BeerDetails = props => (
   <Stats>
-    {_.map(props.text, text => (
-      <Text>{text}</Text>
+    {_.map(props.text, (text, i) => (
+      <Text key={i}>{text}</Text>
     ))}
   </Stats>
 )
