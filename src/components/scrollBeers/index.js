@@ -26,10 +26,9 @@ const DownPanel = styled(UpPanel)`
 `
 
 const ScrollPanel = Div.extend`
-  border: ${props => props.theme.border};
+  border: ${props => (props.loading ? 'none' : props.theme.border)};
   border-radius: 30px;
-  box-shadow: 0 1px 4px rgba(221, 221, 221, 0.6);
-  padding: 0 80px;
+  box-shadow: ${props => props.theme.boxShadow};
 `
 
 const BeerContainer = Div.extend`
