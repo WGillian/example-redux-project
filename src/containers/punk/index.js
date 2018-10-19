@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Header from 'components/header'
 import Div from 'components/core/div'
 import ResponsiveContainer from 'components/core/responsiveContainer'
-import ScrollBeers from 'components/scrollBeers'
+import SearchBeer from 'components/beerSearch'
 import { getPaginatedBeers, incrementPage, decrementPage } from 'redux/actions/punk'
 import { punkSelector } from 'redux/selectors/punk'
 
@@ -25,7 +25,7 @@ class PunkContainer extends Component {
       <Div>
         <Header />
         <MainContentResponsiveContainer>
-          <ScrollBeers
+          <SearchBeer
             beers={this.props.beers}
             isFirstPage={this.props.isFirstPage}
             beersLoading={this.props.beersLoading}

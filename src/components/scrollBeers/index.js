@@ -7,7 +7,7 @@ import { DownArrow, UpArrow } from 'assets/icons/arrows'
 import Spinner from 'components/core/spinner'
 
 const ScrollBeersContainer = Div.extend`
-  padding: 80px;
+  padding: 40px 0 80px 80px;
 `
 
 const UpPanel = Div.extend`
@@ -33,7 +33,7 @@ const scrollPanelStyles = css`
 
 const ScrollPanel = Div.extend`
   border: ${props => (props.loading ? 'none' : props.theme.border)};
-  padding: 0 80px;
+  padding: 0 40px;
   height: 340px;
   ${props => props.scrollPanelStyles};
 `
