@@ -24,6 +24,8 @@ export default (state = initialState, action) => {
       return { ...state, page: action.payload }
     case 'punk/DECREMENT_PAGE':
       return { ...state, page: action.payload }
+    case 'punk/SET_PAGE':
+      return { ...state, page: action.payload }
     case 'punk/UPDATE_FOOD':
       return { ...state, food: action.payload }
     case 'punk/SELECT_ALCOHOL_CONTENT':
