@@ -28,7 +28,7 @@ const DownPanel = styled(UpPanel)`
 
 const scrollPanelStyles = css`
   border-radius: 30px;
-  box-shadow: 0 1px 4px rgba(221, 221, 221, 0.6);
+  box-shadow: ${props => props.theme.boxShadow};
 `
 
 const ScrollPanel = Div.extend`

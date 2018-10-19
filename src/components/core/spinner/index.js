@@ -10,7 +10,8 @@ const SpinnerContainer = Div.extend`
   justify-content: center;
 `
 const SpinnerInnerContainer = Div.extend`
-  ${props => (props.loading ? '' : 'display: none')} position: absolute;
+  ${props => (props.loading ? '' : 'display: none')};
+  position: absolute;
 `
 
 export default props => (
