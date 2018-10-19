@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import _ from 'lodash'
 import Div from 'components/core/div'
 import Text from 'components/core/text'
 import { DownArrow, UpArrow } from 'assets/icons/arrows'
+import Spinner from 'components/core/spinner'
 
 const ScrollBeersContainer = Div.extend`
   padding: 80px;
@@ -25,11 +26,16 @@ const DownPanel = styled(UpPanel)`
   cursor: pointer;
 `
 
-const ScrollPanel = Div.extend`
-  border: ${props => props.theme.border};
+const scrollPanelStyles = css`
   border-radius: 30px;
-  box-shadow: 0 1px 4px rgba(221, 221, 221, 0.6);
+  box-shadow: ${props => props.theme.boxShadow};
+`
+
+const ScrollPanel = Div.extend`
+  border: ${props => (props.loading ? 'none' : props.theme.border)};
   padding: 0 80px;
+  height: 340px;
+  ${props => props.scrollPanelStyles};
 `
 
 const BeerContainer = Div.extend`
@@ -76,18 +82,20 @@ const BeerDisplay = props => {
 
 class ScrollBeers extends Component {
   render() {
-    const isClickable = !this.props.isFirstPage
+    const isClickable = !this.props.isFirstPage && !this.props.beersLoading
     return (
       <ScrollBeersContainer>
         <UpPanel isClickable={isClickable} onClick={isClickable ? () => this.props.onDecrementPage() : () => null}>
-          {isClickable ? <UpArrow /> : null}
+          {!this.props.isFirstPage ? <UpArrow /> : null}
         </UpPanel>
-        <ScrollPanel>
-          {_.map(this.props.beers, beer => (
-            <BeerDisplay beer={beer} key={beer.id} />
-          ))}
-        </ScrollPanel>
-        <DownPanel onClick={() => this.props.onIncrementPage()}>
+        <Spinner spinnerContainerStyle={scrollPanelStyles} loading={this.props.beersLoading}>
+          <ScrollPanel scrollPanelStyles={scrollPanelStyles} loading={this.props.beersLoading}>
+            {_.map(this.props.beers, beer => (
+              <BeerDisplay beer={beer} key={beer.id} />
+            ))}
+          </ScrollPanel>
+        </Spinner>
+        <DownPanel onClick={this.props.beersLoading ? () => null : () => this.props.onIncrementPage()}>
           <DownArrow />
         </DownPanel>
       </ScrollBeersContainer>
