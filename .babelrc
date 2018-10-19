@@ -2,11 +2,10 @@
   "plugins": [
     "transform-class-properties",
     "transform-object-rest-spread",
-    "emotion"
   ],
   "presets": [
     "es2015",
-    "react"
+    "react",
   ],
   "env": {
     "development": {

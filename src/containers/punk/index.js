@@ -28,6 +28,7 @@ class PunkContainer extends Component {
           <ScrollBeers
             beers={this.props.beers}
             isFirstPage={this.props.isFirstPage}
+            beersLoading={this.props.beersLoading}
             onIncrementPage={() => this.props.dispatch(incrementPage(this.props.page))}
             onDecrementPage={() => this.props.dispatch(decrementPage(this.props.page))}
           />
