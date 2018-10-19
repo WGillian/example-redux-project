@@ -10,7 +10,13 @@ const SearchContainer = Div.extend`
 
 export default props => (
   <SearchContainer>
-    <BeerFilters />
+    <BeerFilters
+      food={props.food}
+      onFoodInputUpdated={props.onFoodInputUpdated}
+      selectedAlcoholContent={props.selectedAlcoholContent}
+      alcoholContentOptions={props.alcoholContentOptions}
+      onSelectAlcoholContent={props.onSelectAlcoholContent}
+    />
     <ScrollBeers
       beers={props.beers}
       isFirstPage={props.isFirstPage}

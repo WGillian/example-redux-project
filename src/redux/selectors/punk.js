@@ -16,11 +16,13 @@ export const punkSelector = createSelector(
       descriptionSummary: _.truncate(beer.description),
       stats: getBeerStats(beer),
     }))
+    const selectedAlcoholContent = _.find(punkState.alcoholContentOptions, option => option.value === punkState.selectedAlcoholContent)
     const isFirstPage = punkState.page <= 1
     return {
       ...punkState,
       beers: beers,
       isFirstPage: isFirstPage,
+      selectedAlcoholContent: selectedAlcoholContent,
     }
   },
 )

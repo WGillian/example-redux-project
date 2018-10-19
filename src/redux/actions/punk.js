@@ -1,18 +1,4 @@
-import { apiGet } from 'common/api'
-
-export const getPaginatedBeers = pageNumber => dispatch => {
-  dispatch({ type: 'punk/GET_BEERS_REQUEST' })
-  try {
-    apiGet('/')
-      .query({
-        page: pageNumber,
-        per_page: 4,
-      })
-      .then(response => dispatch({ type: 'punk/GET_BEERS_SUCCESS', payload: response.body }))
-  } catch (error) {
-    dispatch({ type: 'punk/GET_BEERS_ERROR', payload: error })
-  }
-}
+import { getPaginatedBeers } from 'redux/actions/common/getBeers'
 
 export const changePageNumber = (change, pageNumber) => async dispatch => {
   const newPageNumber = change === 'DECREMENT' ? pageNumber - 1 : pageNumber + 1
@@ -29,3 +15,10 @@ export const incrementPage = pageNumber => dispatch => {
 export const decrementPage = pageNumber => dispatch => {
   changePageNumber('DECREMENT', pageNumber)(dispatch)
 }
+
+export const updateFood = food => (dispatch, getState) => {
+  dispatch({ type: 'punk/UPDATE_FOOD', payload: food })
+  getPaginatedBeers(1)(dispatch, getState)
+}
+
+export const selectAlcoholContent = option => ({ type: 'punk/SELECT_ALCOHOL_CONTENT', payload: option })

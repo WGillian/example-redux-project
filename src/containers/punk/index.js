@@ -4,7 +4,8 @@ import Header from 'components/header'
 import Div from 'components/core/div'
 import ResponsiveContainer from 'components/core/responsiveContainer'
 import SearchBeer from 'components/beerSearch'
-import { getPaginatedBeers, incrementPage, decrementPage } from 'redux/actions/punk'
+import { incrementPage, decrementPage, updateFood, selectAlcoholContent } from 'redux/actions/punk'
+import { getPaginatedBeers } from 'redux/actions/common/getBeers'
 import { punkSelector } from 'redux/selectors/punk'
 
 const MainContentResponsiveContainer = ResponsiveContainer.extend`
@@ -29,8 +30,13 @@ class PunkContainer extends Component {
             beers={this.props.beers}
             isFirstPage={this.props.isFirstPage}
             beersLoading={this.props.beersLoading}
+            food={this.props.food}
+            selectedAlcoholContent={this.props.selectedAlcoholContent}
+            alcoholContentOptions={this.props.alcoholContentOptions}
             onIncrementPage={() => this.props.dispatch(incrementPage(this.props.page))}
             onDecrementPage={() => this.props.dispatch(decrementPage(this.props.page))}
+            onFoodInputUpdated={food => this.props.dispatch(updateFood(food))}
+            onSelectAlcoholContent={option => this.props.dispatch(selectAlcoholContent(option.value))}
           />
         </MainContentResponsiveContainer>
       </Div>
