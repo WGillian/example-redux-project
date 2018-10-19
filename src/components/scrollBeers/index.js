@@ -5,6 +5,8 @@ import Div from 'components/core/div'
 import Text from 'components/core/text'
 import { DownArrow, UpArrow } from 'assets/icons/arrows'
 
+import { BounceLoader } from 'react-spinners'
+
 const ScrollBeersContainer = Div.extend`
   padding: 80px;
 `
@@ -60,6 +62,12 @@ const BeerDetails = props => (
   </Stats>
 )
 
+const Spinner = props => (
+  <Div {...props}>
+    <BounceLoader sizeUnit={'px'} size={150} color={'#123abc'} loading />
+  </Div>
+)
+
 const BeerDisplay = props => {
   const beer = props.beer
   return (
@@ -79,6 +87,7 @@ class ScrollBeers extends Component {
     const isClickable = !this.props.isFirstPage
     return (
       <ScrollBeersContainer>
+        <Spinner />
         <UpPanel isClickable={isClickable} onClick={isClickable ? () => this.props.onDecrementPage() : () => null}>
           {isClickable ? <UpArrow /> : null}
         </UpPanel>
