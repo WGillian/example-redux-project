@@ -1,10 +1,10 @@
 import _ from 'lodash'
 import { apiGet } from 'common/api'
 
-export const getPaginatedBeers = pageNumber => (dispatch, getState) => {
-  const punkState = _.isFunction(getState) ? getState().punk : getState
-  console.log('gilllian', punkState)
-  const queryParams = _.omitBy(
+const BEERS_PER_PAGE = 4
+
+const getQueryParemters = punkState => {
+  return _.omitBy(
     {
       food: _.isEmpty(punkState.food) ? null : punkState.food,
       abv_lt: punkState.selectedAlcoholContent === -1 || punkState.selectedAlcoholContent === 11 ? null : punkState.selectedAlcoholContent,
@@ -12,14 +12,19 @@ export const getPaginatedBeers = pageNumber => (dispatch, getState) => {
     },
     _.isNil,
   )
+}
+
+export const getPaginatedBeers = pageNumber => (dispatch, getState) => {
+  const punkState = _.isFunction(getState) ? getState().punk : getState
+  const queryParamameters = getQueryParemters(punkState)
 
   dispatch({ type: 'punk/GET_BEERS_REQUEST' })
   try {
     apiGet('/')
       .query({
         page: pageNumber,
-        per_page: 4,
-        ...queryParams,
+        per_page: BEERS_PER_PAGE,
+        ...queryParamameters,
       })
       .then(response => dispatch({ type: 'punk/GET_BEERS_SUCCESS', payload: response.body }))
   } catch (error) {

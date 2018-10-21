@@ -1,13 +1,21 @@
 import { getPaginatedBeers } from 'redux/actions/common/getBeers'
 
+const getNewPageNumber = (change, pageNumber) => {
+  if (change === 'DECREMENT') {
+    return pageNumber - 1
+  }
+  if (change === 'INCREMENT') {
+    return pageNumber + 1
+  }
+  return pageNumber
+}
+
 export const changePageNumber = (change, pageNumber) => async (dispatch, getState) => {
-  const setPageNumber = change === 'SET' ? pageNumber : null
-  console.log('setPage: ', setPageNumber)
-  const newPageNumber = change === 'DECREMENT' ? pageNumber - 1 : pageNumber + 1
+  const newPageNumber = getNewPageNumber(change, pageNumber)
 
-  await getPaginatedBeers(setPageNumber || newPageNumber)(dispatch, getState)
+  await getPaginatedBeers(newPageNumber)(dispatch, getState)
 
-  dispatch({ type: `punk/${change}_PAGE`, payload: setPageNumber || newPageNumber })
+  dispatch({ type: `punk/${change}_PAGE`, payload: newPageNumber })
 }
 
 export const incrementPage = pageNumber => (dispatch, getState) => {

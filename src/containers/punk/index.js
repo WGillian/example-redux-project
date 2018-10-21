@@ -23,11 +23,9 @@ class PunkContainer extends Component {
     }
   }
 
+  // Add error message for when no beer matches search
+
   render() {
-    console.log(this.props)
-    if (this.props.loadingBeers) {
-      return <h1>Loading...</h1>
-    }
     return (
       <Div>
         <Header />

@@ -75,7 +75,7 @@ const BeerDisplay = props => {
       </ImageContainer>
       <BeerDetails text={beer.stats} />
       <BeerDetails text={[beer.descriptionSummary]} />
-      <BeerDetails text={[beer.foodSummary]} />
+      <BeerDetails text={beer.food} />
     </BeerContainer>
   )
 }
