@@ -9,6 +9,7 @@ import ErrorMessage from 'components/core/errorMessage'
 
 const ScrollBeersContainer = Div.extend`
   padding: 40px 0 80px 80px;
+  flex: 1;
 `
 
 const UpPanel = Div.extend`
@@ -101,11 +102,11 @@ class ScrollBeers extends Component {
     return (
       <Div>
         <UpPanel isClickable={isClickable} onClick={isClickable ? () => this.props.onDecrementPage() : () => null}>
-          {!this.props.isFirstPage ? <UpArrow /> : null}
+          {!this.props.isFirstPage ? <UpArrow style={{ width: '50px' }} /> : null}
         </UpPanel>
         {this.renderScrollPanel()}
         <DownPanel onClick={this.props.beersLoading ? () => null : () => this.props.onIncrementPage()}>
-          <DownArrow />
+          <DownArrow style={{ width: '50px' }} />
         </DownPanel>
       </Div>
     )

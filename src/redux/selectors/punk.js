@@ -2,8 +2,8 @@ import _ from 'lodash'
 import { createSelector } from 'reselect'
 
 const getBeerStats = beer => {
-  const returnStat = stat => stat || 'unknown'
-  return [`Name: ${returnStat(beer.name)}`, `ABV: ${returnStat(beer.abv)}`, `ph: ${returnStat(beer.ph)}`]
+  const statOrUnknown = stat => stat || 'unknown'
+  return [`Name: ${statOrUnknown(beer.name)}`, `ABV: ${statOrUnknown(beer.abv)}`, `ph: ${statOrUnknown(beer.ph)}`]
 }
 
 const shortenFoodPairing = foods => {
@@ -23,7 +23,7 @@ export const punkSelector = createSelector(
   punkState => {
     const beers = _.map(punkState.beers, beer => ({
       ...beer,
-      descriptionSummary: _.truncate(beer.description, { length: 100 }),
+      descriptionSummary: _.truncate(beer.description, { length: 80 }),
       stats: getBeerStats(beer),
       food: shortenFoodPairing(beer.food_pairing),
     }))
@@ -36,7 +36,7 @@ export const punkSelector = createSelector(
       isFirstPage: isFirstPage,
       fullSelectedAlcoholContent: fullSelectedAlcoholContent,
       alcContentLowerBoundry: alcContentLowerBoundry,
-      noBeersError: _.isEmpty(beers) ? `There are no beers that match your search` : null,
+      noBeersError: _.isEmpty(beers) && !punkState.beersLoading ? `There are no beers that match your search` : null,
     }
   },
 )
