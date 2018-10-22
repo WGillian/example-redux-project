@@ -9,6 +9,7 @@ const getQueryParemters = punkState => {
       food: _.isEmpty(punkState.food) ? null : punkState.food,
       abv_lt: punkState.selectedAlcoholContent === -1 || punkState.selectedAlcoholContent === 11 ? null : punkState.selectedAlcoholContent,
       abv_gt: punkState.selectedAlcoholContent === 11 ? punkState.selectedAlcoholContent : punkState.alcContentLowerBoundry,
+      malt: punkState.selectedMalt.value,
     },
     _.isNil,
   )
@@ -19,15 +20,13 @@ export const getPaginatedBeers = pageNumber => (dispatch, getState) => {
   const queryParamameters = getQueryParemters(punkState)
 
   dispatch({ type: 'punk/GET_BEERS_REQUEST' })
-  try {
-    apiGet('/')
-      .query({
-        page: pageNumber,
-        per_page: BEERS_PER_PAGE,
-        ...queryParamameters,
-      })
-      .then(response => dispatch({ type: 'punk/GET_BEERS_SUCCESS', payload: response.body }))
-  } catch (error) {
-    dispatch({ type: 'punk/GET_BEERS_ERROR', payload: error })
-  }
+
+  apiGet('/')
+    .query({
+      page: pageNumber,
+      per_page: BEERS_PER_PAGE,
+      ...queryParamameters,
+    })
+    .then(response => dispatch({ type: 'punk/GET_BEERS_SUCCESS', payload: response.body }))
+    .catch(error => dispatch({ type: 'punk/GET_BEERS_ERROR', payload: error }))
 }

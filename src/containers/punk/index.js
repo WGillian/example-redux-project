@@ -4,7 +4,7 @@ import Header from 'components/header'
 import Div from 'components/core/div'
 import ResponsiveContainer from 'components/core/responsiveContainer'
 import SearchBeer from 'components/beerSearch'
-import { incrementPage, decrementPage, updateFood, selectAlcoholContent, reloadBeers } from 'redux/actions/punk'
+import { incrementPage, decrementPage, updateFood, selectAlcoholContent, reloadBeers, selectMalt } from 'redux/actions/punk'
 import { getPaginatedBeers } from 'redux/actions/common/getBeers'
 import { punkSelector } from 'redux/selectors/punk'
 
@@ -18,12 +18,10 @@ class PunkContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.selectedAlcoholContent !== prevProps.selectedAlcoholContent) {
+    if (this.props.selectedAlcoholContent !== prevProps.selectedAlcoholContent || this.props.selectedMalt !== prevProps.selectedMalt) {
       this.props.dispatch(reloadBeers()(this.props))
     }
   }
-
-  // Add error message for when no beer matches search
 
   render() {
     return (
@@ -37,10 +35,14 @@ class PunkContainer extends Component {
             food={this.props.food}
             selectedAlcoholContent={this.props.fullSelectedAlcoholContent}
             alcoholContentOptions={this.props.alcoholContentOptions}
+            noBeersError={this.props.noBeersError}
             onIncrementPage={() => this.props.dispatch(incrementPage(this.props.page))}
             onDecrementPage={() => this.props.dispatch(decrementPage(this.props.page))}
             onFoodInputUpdated={food => this.props.dispatch(updateFood(food))}
             onSelectAlcoholContent={option => this.props.dispatch(selectAlcoholContent(option.value))}
+            selectedMalt={this.props.selectedMalt}
+            maltOptions={this.props.maltOptions}
+            onSelectMalt={malt => this.props.dispatch(selectMalt(malt))}
           />
         </MainContentResponsiveContainer>
       </Div>

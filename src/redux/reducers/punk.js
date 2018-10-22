@@ -12,6 +12,14 @@ const initialState = {
     { value: 11, label: 'Above 10%' },
   ],
   selectedAlcoholContent: -1,
+  selectedMalt: { value: null, label: 'All' },
+  maltOptions: [
+    { value: null, label: 'All' },
+    { value: 'Extra_Pale', label: 'Extra Pale' },
+    { value: 'Caramalt', label: 'Caramalt' },
+    { value: 'Dark_Crystal', label: 'Dark Crystal' },
+    { value: 'Munich', label: 'Munich' },
+  ],
 }
 
 export default (state = initialState, action) => {
@@ -30,6 +38,8 @@ export default (state = initialState, action) => {
       return { ...state, food: action.payload }
     case 'punk/SELECT_ALCOHOL_CONTENT':
       return { ...state, selectedAlcoholContent: action.payload }
+    case 'punk/SELECT_MALT':
+      return { ...state, selectedMalt: action.payload }
     default:
       return state
   }

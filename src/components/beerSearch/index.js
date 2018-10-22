@@ -16,11 +16,15 @@ export default props => (
       selectedAlcoholContent={props.selectedAlcoholContent}
       alcoholContentOptions={props.alcoholContentOptions}
       onSelectAlcoholContent={props.onSelectAlcoholContent}
+      selectedMalt={props.selectedMalt}
+      maltOptions={props.maltOptions}
+      onSelectMalt={props.onSelectMalt}
     />
     <ScrollBeers
       beers={props.beers}
       isFirstPage={props.isFirstPage}
       beersLoading={props.beersLoading}
+      noBeersError={props.noBeersError}
       onIncrementPage={props.onIncrementPage}
       onDecrementPage={props.onDecrementPage}
     />

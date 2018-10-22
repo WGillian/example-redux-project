@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-// import styled, { css } from 'styled-components'
-// import _ from 'lodash'
 import Div from 'components/core/div'
 import Text from 'components/core/text'
 import Input from 'components/core/input'
-// import Spinner from 'components/core/spinner'
-
-import Select from 'react-select'
+import DropDown from 'components/core/dropDown'
 
 const FilterFieldContainer = Div.extend`
   margin-top: 20px;
@@ -19,9 +15,15 @@ const FilterField = props => (
   </FilterFieldContainer>
 )
 
-const DropDown = props => (
+const DropDownField = props => (
   <FilterField label={props.label}>
-    <Select value={props.value} onChange={props.onChange} options={props.options} />
+    <DropDown value={props.value} onChange={props.onChange} options={props.options} />
+  </FilterField>
+)
+
+const SearchBox = props => (
+  <FilterField label={props.label}>
+    <Input value={props.value} onChange={event => props.onChange(event.target.value)} />
   </FilterField>
 )
 
@@ -43,15 +45,14 @@ export default class BeerFilters extends Component {
     return (
       <FiltersContainer>
         <Text>Add your favourite tastes to filter your search</Text>
-        <DropDown
-          label="How boozy do you want to get?"
+        <DropDownField
+          label="Filter beers by alcohol content"
           value={this.props.selectedAlcoholContent}
           options={this.props.alcoholContentOptions}
           onChange={this.props.onSelectAlcoholContent}
         />
-        <FilterField label="Find a beer that compliments your food">
-          <Input value={this.props.food} onChange={event => this.props.onFoodInputUpdated(event.target.value)} />
-        </FilterField>
+        <SearchBox label="Find a beer that compliments your food" value={this.props.food} onChange={this.props.onFoodInputUpdated} />
+        <DropDownField label="Filter beers by malt type" value={this.props.selectedMalt} options={this.props.maltOptions} onChange={this.props.onSelectMalt} />
       </FiltersContainer>
     )
   }

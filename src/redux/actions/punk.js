@@ -7,10 +7,13 @@ const getNewPageNumber = (change, pageNumber) => {
   if (change === 'INCREMENT') {
     return pageNumber + 1
   }
+  if (change === 'SET') {
+    return pageNumber
+  }
   return pageNumber
 }
 
-export const changePageNumber = (change, pageNumber) => async (dispatch, getState) => {
+const changePage = (change, pageNumber) => async (dispatch, getState) => {
   const newPageNumber = getNewPageNumber(change, pageNumber)
 
   await getPaginatedBeers(newPageNumber)(dispatch, getState)
@@ -19,20 +22,22 @@ export const changePageNumber = (change, pageNumber) => async (dispatch, getStat
 }
 
 export const incrementPage = pageNumber => (dispatch, getState) => {
-  changePageNumber('INCREMENT', pageNumber)(dispatch, getState)
+  changePage('INCREMENT', pageNumber)(dispatch, getState)
 }
 
 export const decrementPage = pageNumber => (dispatch, getState) => {
-  changePageNumber('DECREMENT', pageNumber)(dispatch, getState)
+  changePage('DECREMENT', pageNumber)(dispatch, getState)
 }
 
 export const updateFood = food => (dispatch, getState) => {
   dispatch({ type: 'punk/UPDATE_FOOD', payload: food })
-  changePageNumber('SET', 1)(dispatch, getState)
+  changePage('SET', 1)(dispatch, getState)
 }
 
 export const selectAlcoholContent = option => ({ type: 'punk/SELECT_ALCOHOL_CONTENT', payload: option })
 
 export const reloadBeers = () => state => dispatch => {
-  changePageNumber('SET', 1)(dispatch, state)
+  changePage('SET', 1)(dispatch, state)
 }
+
+export const selectMalt = malt => ({ type: 'punk/SELECT_MALT', payload: malt })
