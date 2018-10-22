@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import Header from 'components/header'
 import Div from 'components/core/div'
 import ResponsiveContainer from 'components/core/responsiveContainer'
-import ScrollBeers from 'components/scrollBeers'
-import { getPaginatedBeers, incrementPage, decrementPage } from 'redux/actions/punk'
+import SearchBeer from 'components/beerSearch'
+import { incrementPage, decrementPage, updateFood, selectAlcoholContent, reloadBeers, selectMalt } from 'redux/actions/punk'
+import { getPaginatedBeers } from 'redux/actions/common/getBeers'
 import { punkSelector } from 'redux/selectors/punk'
 
 const MainContentResponsiveContainer = ResponsiveContainer.extend`
@@ -16,21 +17,32 @@ class PunkContainer extends Component {
     this.props.dispatch(getPaginatedBeers(this.props.page))
   }
 
-  render() {
-    console.log(this.props)
-    if (this.props.loadingBeers) {
-      return <h1>Loading...</h1>
+  componentDidUpdate(prevProps) {
+    if (this.props.selectedAlcoholContent !== prevProps.selectedAlcoholContent || this.props.selectedMalt !== prevProps.selectedMalt) {
+      this.props.dispatch(reloadBeers()(this.props))
     }
+  }
+
+  render() {
     return (
       <Div>
         <Header />
         <MainContentResponsiveContainer>
-          <ScrollBeers
+          <SearchBeer
             beers={this.props.beers}
             isFirstPage={this.props.isFirstPage}
             beersLoading={this.props.beersLoading}
+            food={this.props.food}
+            selectedAlcoholContent={this.props.fullSelectedAlcoholContent}
+            alcoholContentOptions={this.props.alcoholContentOptions}
+            noBeersError={this.props.noBeersError}
             onIncrementPage={() => this.props.dispatch(incrementPage(this.props.page))}
             onDecrementPage={() => this.props.dispatch(decrementPage(this.props.page))}
+            onFoodInputUpdated={food => this.props.dispatch(updateFood(food))}
+            onSelectAlcoholContent={option => this.props.dispatch(selectAlcoholContent(option.value))}
+            selectedMalt={this.props.selectedMalt}
+            maltOptions={this.props.maltOptions}
+            onSelectMalt={malt => this.props.dispatch(selectMalt(malt))}
           />
         </MainContentResponsiveContainer>
       </Div>
