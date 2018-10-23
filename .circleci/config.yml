@@ -23,15 +23,8 @@ jobs:
         - run:
             name: test
             command: yarn test
-        - deploy:
-            command: |
-              if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                yarn run deploy:ci:dev
-              elif [ "${CIRCLE_BRANCH}" == "production" ]; then
-                yarn run deploy:ci:prod
-              fi
 workflows:
   version: 2
   workflow:
     jobs:
-      - build-test-deploy
+      - test

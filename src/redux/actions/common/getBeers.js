@@ -9,7 +9,7 @@ const getQueryParemters = punkState => {
       food: _.isEmpty(punkState.food) ? null : punkState.food,
       abv_lt: punkState.selectedAlcoholContent === -1 || punkState.selectedAlcoholContent === 11 ? null : punkState.selectedAlcoholContent,
       abv_gt: punkState.selectedAlcoholContent === 11 ? punkState.selectedAlcoholContent : punkState.alcContentLowerBoundry,
-      malt: punkState.selectedMalt.value,
+      malt: punkState.selectedMalt.value === -1 ? null : punkState.selectedMalt.value,
     },
     _.isNil,
   )
