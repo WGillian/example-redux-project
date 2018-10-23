@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
-import todos from './reducers/todos'
-import user from './reducers/user'
+import punk from './reducers/punk'
 
 const rootReducer = combineReducers({
-  todos,
-  user,
+  punk,
 })
 
 export default rootReducer
